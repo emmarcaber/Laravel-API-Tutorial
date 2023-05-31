@@ -4,7 +4,7 @@ namespace App\Filters\V1;
 
 use Illuminate\Http\Request;
 
-class CustomerFilter
+class CustomersFilter
 {
     protected $safeParms = [
         'name' => ['eq'],
