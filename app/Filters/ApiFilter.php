@@ -31,7 +31,7 @@ class ApiFilter
             // null coalescing operator (??)
             // 0 ?? 42      # returns 9
             // null ?? 42   $ returns 42
-            $column = $this->columnMap['$parm'] ?? $parm;
+            $column = $this->columnMap[$parm] ?? $parm;
 
             // iterate on all of the operators
             foreach ($operators as $operator) {
