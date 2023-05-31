@@ -9,6 +9,8 @@ use App\Http\Requests\UpdateCustomerRequest;
 use App\Http\Resources\V1\CustomerCollection;
 use App\Http\Resources\V1\CustomerResource;
 
+use App\Services\V1\CustomerQuery;
+
 class CustomerController extends Controller
 {
     /**
@@ -16,7 +18,17 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        return new CustomerCollection(Customer::paginate());
+        $filter = new CustomerQuery();
+
+        // dd(request()->query());
+
+        $queryItems = $filter->transform(request()); // [['columnn', 'operator', 'value']]
+
+        if (count($queryItems) == 0) {
+            return new CustomerCollection(Customer::paginate());
+        } else {
+            return new CustomerCollection(Customer::where($queryItems)->paginate());
+        }
     }
 
     /**
