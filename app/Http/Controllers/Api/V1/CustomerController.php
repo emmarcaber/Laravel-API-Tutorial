@@ -9,7 +9,7 @@ use App\Http\Requests\UpdateCustomerRequest;
 use App\Http\Resources\V1\CustomerCollection;
 use App\Http\Resources\V1\CustomerResource;
 
-use App\Services\V1\CustomerQuery;
+use App\Filters\V1\CustomerFilter;
 
 class CustomerController extends Controller
 {
@@ -18,7 +18,7 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $filter = new CustomerQuery();
+        $filter = new CustomerFilter();
 
         // dd(request()->query());
 
