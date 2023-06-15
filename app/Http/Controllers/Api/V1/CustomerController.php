@@ -64,7 +64,13 @@ class CustomerController extends Controller
      */
     public function update(UpdateCustomerRequest $request, Customer $customer)
     {
-        $customer->update($request->all());
+        if ($customer->update($request->all())) {
+            return response()->json([
+                'message' => 'Customer updated successfully!',
+                'success' => true,
+                'data' => $customer,
+            ]);
+        }
     }
 
     /**
@@ -72,6 +78,15 @@ class CustomerController extends Controller
      */
     public function destroy(Customer $customer)
     {
-        $customer->delete();
+        if ($customer->delete()) {
+            return response()->json([
+                'message' => 'Customer deleted successfully!',
+                'success' => true,
+                'data' => [
+                    'name' => $customer->name,
+                    'email' => $customer->email
+                ],
+            ]);
+        }
     }
 }
